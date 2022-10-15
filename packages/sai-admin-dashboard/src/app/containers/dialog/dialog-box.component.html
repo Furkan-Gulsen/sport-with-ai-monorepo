@@ -1,0 +1,15 @@
+<h2 mat-dialog-title>Are you sure?</h2>
+<mat-dialog-content class="mat-typography text-center">
+  <h3>{{ content }}</h3>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button class="btn btn-danger" mat-dialog-close>Cancel</button>
+  <button
+    class="btn btn-success"
+    [mat-dialog-close]="true"
+    style="margin-left: 10px"
+    cdkFocusInitial
+  >
+    Okay
+  </button>
+</mat-dialog-actions>

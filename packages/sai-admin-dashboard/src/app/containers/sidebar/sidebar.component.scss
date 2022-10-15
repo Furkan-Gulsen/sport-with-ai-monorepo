@@ -1,0 +1,25 @@
+.active-page {
+  background-color: rgb(255, 255, 255);
+  color: black;
+  font-weight: bold;
+}
+
+.bi-meta {
+  font-size: 40px;
+}
+
+#sidebar {
+  position: fixed;
+  margin: 20px 30px;
+  width: 280px;
+  height: 95vh;
+  display: flex;
+  align-items: stretch;
+  border-radius: 30px;
+}
+
+#logout {
+  position: absolute;
+  bottom: 3rem;
+  width: 90%;
+}

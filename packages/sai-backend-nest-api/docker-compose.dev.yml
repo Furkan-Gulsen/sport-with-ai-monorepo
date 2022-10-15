@@ -1,0 +1,51 @@
+version: '3.7'
+services:
+  db:
+    container_name: db
+    image: postgres:12.9
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: nestjs
+    volumes:
+      - database-data:/var/lib/postgresql/data
+    restart: always
+
+  sai-backend:
+    container_name: sai-backend
+    image: sai-backend
+    build:
+      context: .
+      target: development
+      dockerfile: Dockerfile
+    command: npm run start:dev
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    links:
+      - db
+    depends_on:
+      - db
+    restart: always
+
+  postgres_admin:
+    image: dpage/pgadmin4:4.28
+    depends_on:
+      - db
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: password
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+      PGADMIN_CONFIG_MASTER_PASSWORD_REQUIRED: 'False'
+    ports:
+      - 5050:80
+    volumes:
+      - pd-data:/var/lib/pgadmin
+
+volumes:
+  database-data:
+  pd-data:

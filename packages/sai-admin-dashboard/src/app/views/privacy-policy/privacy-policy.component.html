@@ -1,0 +1,31 @@
+<div class="sai-main">
+  <!-- Title -->
+  <div class="row text-right">
+    <div class="col">
+      <h1 class="mb-0 pb-0 title">Privacy Policy</h1>
+      <hr />
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <textarea
+          [innerHTML]="content"
+          class="form-control"
+          id="exampleFormControlTextarea1"
+          rows="20"
+          style="font-size: 12px"
+          (input)="changeContent(privacyPolicy.value)"
+          #privacyPolicy
+        ></textarea>
+        <button
+          class="btn btn-success float-end mt-3"
+          (click)="editPrivacyPolicy()"
+        >
+          UPDATE
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

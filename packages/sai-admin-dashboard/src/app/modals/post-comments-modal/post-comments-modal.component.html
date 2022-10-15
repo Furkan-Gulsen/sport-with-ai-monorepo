@@ -1,0 +1,48 @@
+<div class="container p-4">
+  <!-- Body -->
+  <div class="row">
+    <div class="col">
+      <div class="row">
+        <div class="col-10">
+          <div class="form-floating mb-2">
+            <textarea
+              style="border: none"
+              class="form-control"
+              placeholder="Leave a comment here"
+              id="floatingTextarea"
+              rows="2"
+              #newComment
+            ></textarea>
+            <label for="floatingTextarea">What are your thoughts?</label>
+          </div>
+        </div>
+        <div class="col-2">
+          <button
+            class="btn btn-primary"
+            style="border-radius: 50px"
+            (click)="reply(newComment.value)"
+          >
+            Reply
+          </button>
+        </div>
+      </div>
+
+      <ul
+        class="list-group list-group-flush"
+        style="max-height: 500px; overflow-y: scroll"
+      >
+        <li class="list-group-item" *ngFor="let comment of comments">
+          <div class="mb-1 fw-bold badge bg-dark color-white">
+            {{ comment.commentUser!.username }}
+          </div>
+          <div class="float-end" style="font-size: 12px; opacity: 0.65">
+            {{ comment.creationDate | date: "medium" }}
+          </div>
+          <p class="mb-1">
+            {{ comment.comment }}
+          </p>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

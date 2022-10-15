@@ -1,0 +1,94 @@
+<div class="container p-4">
+  <!-- Title -->
+  <div class="row text-center">
+    <div class="col">
+      <h1>
+        {{ modalType == "create" ? "Create Activity" : "Update Activity" }}
+      </h1>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="row">
+    <div class="col">
+      <form [formGroup]="activityFormGroup" (ngSubmit)="createActivity()">
+        <!-- Activity Name -->
+        <div class="row mb-3">
+          <label for="activityName" class="col-sm-3 col-form-label">Name</label>
+          <div class="col-sm-9">
+            <input
+              type="text"
+              class="form-control"
+              id="activityName"
+              placeholder="Example: Push Up"
+              formControlName="name"
+            />
+          </div>
+        </div>
+        <!-- Activity Number of Repetitions -->
+        <div class="row mb-3">
+          <label for="numberOfRepetitions" class="col-sm-3 col-form-label"
+            >Repetitions</label
+          >
+          <div class="col-sm-9">
+            <input
+              type="number"
+              class="form-control"
+              id="numberOfRepetitions"
+              placeholder="Number of Repetitions"
+              formControlName="numberOfRepetitions"
+            />
+          </div>
+        </div>
+        <!-- Total Calorie -->
+        <div class="row mb-3">
+          <label for="calorie" class="col-sm-3 col-form-label">Calorie</label>
+          <div class="col-sm-9">
+            <input
+              type="number"
+              class="form-control"
+              id="calorie"
+              placeholder="Calorie"
+              formControlName="calorie"
+            />
+          </div>
+        </div>
+        <!-- Activity is AI -->
+        <div class="row mb-3">
+          <label class="col-sm-3 col-form-label">AI</label>
+          <div class="col-sm-9">
+            <select
+              class="form-select"
+              aria-label="Default select example"
+              formControlName="isAI"
+            >
+              <option value="true">True</option>
+              <option value="false">False</option>
+            </select>
+          </div>
+        </div>
+        <!-- Activity Image -->
+        <div class="row mb-3">
+          <img [src]="imageURL" class="cover-image mb-2" />
+          <label class="col-form-label col-sm-3">Activity Image</label>
+          <div class="col-sm-9">
+            <input
+              class="form-control form-control-sm"
+              type="file"
+              id="cover-image"
+              (input)="handleFileInput($event)"
+            />
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-success btn-block"
+          [disabled]="isLoading"
+        >
+          {{ modalType == "create" ? "CREATE" : "UPDATE" }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

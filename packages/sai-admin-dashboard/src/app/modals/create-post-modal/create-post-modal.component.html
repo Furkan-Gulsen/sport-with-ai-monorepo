@@ -1,0 +1,105 @@
+<div class="container p-4">
+  <!-- Title -->
+  <div class="row text-center">
+    <div class="col"></div>
+  </div>
+
+  <div class="row">
+    <div class="col" (click)="checkTab()">
+      <div *ngIf="postType == 'text'">
+        <div class="form-floating mt-2">
+          <textarea
+            class="form-control"
+            placeholder="Leave a comment here"
+            id="textPost"
+            style="height: 100px"
+            #textContent
+          ></textarea>
+          <label for="textPost">Content</label>
+        </div>
+
+        <button
+          class="btn btn-primary"
+          style="float: right; margin-top: 15px"
+          (click)="shareTextPost(textContent.value)"
+        >
+          SHARE
+        </button>
+      </div>
+      <!-- IMAGE POST -->
+      <div *ngIf="postType == 'image'">
+        <div class="form-floating mt-2">
+          <textarea
+            class="form-control"
+            placeholder="Leave a comment here"
+            id="textPost"
+            style="height: 100px"
+            #imageContent
+          ></textarea>
+          <label for="textPost">Content</label>
+        </div>
+        <div class="mt-3">
+          <input
+            class="form-control"
+            type="file"
+            id="formFile"
+            (input)="handleFileInput($event)"
+          />
+        </div>
+        <button
+          class="btn btn-primary"
+          style="float: right; margin-top: 15px"
+          (click)="shareImagePost(imageContent.value)"
+        >
+          SHARE
+        </button>
+      </div>
+      <!-- POOL POST -->
+      <div *ngIf="postType == 'pool'">
+        <form [formGroup]="poolForm" (ngSubmit)="sharePoolPost()">
+          <div class="form-floating mt-2">
+            <textarea
+              class="form-control"
+              placeholder="Leave a comment here"
+              id="textPost"
+              style="height: 100px"
+              formControlName="content"
+            ></textarea>
+            <label for="textPost">Content</label>
+          </div>
+          <div class="mb-3 mt-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Option 1"
+              formControlName="option1"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Option 2"
+              formControlName="option2"
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Option 3"
+              formControlName="option3"
+            />
+          </div>
+          <button
+            type="submit"
+            class="btn btn-primary"
+            style="float: right; margin-top: 15px"
+          >
+            SHARE
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
