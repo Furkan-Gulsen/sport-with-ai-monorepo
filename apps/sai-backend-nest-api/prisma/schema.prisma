@@ -1,6 +1,5 @@
 datasource db {
   provider = "postgresql"
-  // url      = "postgresql://postgres:J0tk0gwECPBPMF0jJTeX@sai-postgres.chrxubv5fkw8.us-east-2.rds.amazonaws.com:5432/swai_database"
   url      = env("DEV_DATABASE_URL")
 }
 
@@ -84,7 +83,6 @@ model Post {
   postImage    PostImage?
   postVideo    PostVideo?
   pool         Pool?
-
 }
 
 model PostImage {

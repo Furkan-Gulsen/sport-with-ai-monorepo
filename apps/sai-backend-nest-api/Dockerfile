@@ -27,12 +27,12 @@ FROM node:14 AS builder
 # Create app directory
 WORKDIR /app
 
-ENV DEV_DATABASE_URL=postgresql://postgres:J0tk0gwECPBPMF0jJTeX@sai-postgres.chrxubv5fkw8.us-east-2.rds.amazonaws.com:5432/swai_database
-ENV AMQPS_URL=amqps://yfecuoqj:NTKDvMwTks6XFC9VTB4xZYrcXBQkRi8U@cow.rmq2.cloudamqp.com/yfecuoqj
-ENV EMAIL_ID=sportwithai@gmail.com
-ENV EMAIL_PASS=D83Ju1I2O4HfSzIoJZlO
-ENV AWS_ACCESSKEYID=AKIA3NNSYTEPCIYHGLAW
-ENV AWS_SECRETACCESSKEY=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  
+ENV DEV_DATABASE_URL=dev_database_url
+ENV AMQPS_URL=amqps_url
+ENV EMAIL_ID=email
+ENV EMAIL_PASS=password
+ENV AWS_ACCESSKEYID=access_key
+ENV AWS_SECRETACCESSKEY=secret_key  
 
 # A wildcard is used to ensure both package.json AND package-lock.json are copied
 COPY package*.json ./
