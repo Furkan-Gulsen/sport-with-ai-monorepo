@@ -1,0 +1,48 @@
+.social-media-page {
+  text-align: left;
+  max-width: 500px;
+  padding-bottom: 25px;
+}
+
+.header {
+  padding: 10px;
+  background-color: rgba(214, 214, 214, 0.534);
+  border-radius: 8px;
+}
+
+.bi-image-fill {
+  padding: 8px;
+  font-size: 22px;
+  margin-right: 5px;
+  cursor: pointer;
+  border-radius: 10px !important;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: rgb(33, 33, 33);
+    color: white;
+    transition: 0.2s;
+  }
+}
+
+.bi-bar-chart-fill {
+  padding: 8px;
+  font-size: 22px;
+  margin-right: 5px;
+  cursor: pointer;
+  border-radius: 10px !important;
+  transition: 0.2s;
+
+  &:hover {
+    background-color: rgb(33, 33, 33);
+    color: white;
+    transition: 0.2s;
+  }
+}
+
+#createPost {
+  margin-right: 10px;
+  border-radius: 6px;
+  border: none;
+  background-color: white;
+}

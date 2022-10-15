@@ -1,0 +1,10 @@
+<div class="loader_container" *ngIf="loaderService.isLoading | async">
+  <mat-progress-bar
+    class="progress-bar"
+    mode="indeterminate"
+  ></mat-progress-bar>
+</div>
+
+<router-outlet
+  ><app-toasts aria-live="polite" aria-atomic="true"></app-toasts
+></router-outlet>

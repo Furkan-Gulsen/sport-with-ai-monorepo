@@ -1,0 +1,11 @@
+.profile-image {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.post-image {
+  max-width: 100%;
+  max-height: 465px;
+  object-fit: cover;
+}

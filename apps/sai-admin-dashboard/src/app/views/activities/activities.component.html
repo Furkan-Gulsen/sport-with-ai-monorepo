@@ -1,0 +1,54 @@
+<div class="sai-main">
+  <!-- Title -->
+  <div class="row text-right">
+    <div class="col">
+      <h1 class="mb-0 pb-0 title">Activities</h1>
+      <hr />
+    </div>
+  </div>
+
+  <!-- Action Buttons Area -->
+  <div class="row mb-2">
+    <div class="col">
+      <button class="btn btn-dark" (click)="createActivity()">
+        <i class="bi bi-person-plus"></i>
+        Create Activity
+      </button>
+    </div>
+  </div>
+
+  <table class="table text-center">
+    <thead class="bg-dark text-light">
+      <tr>
+        <th scope="col">Creation Date</th>
+        <th scope="col">Activity Name</th>
+        <th scope="col">Number of Repetitions</th>
+        <th scope="col">AI</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let activity of activities">
+        <td>{{ activity.creationDate | date }}</td>
+        <th>{{ activity.name }}</th>
+        <td>{{ activity.numberOfRepetitions }}</td>
+        <td>{{ activity.isAI ? "🟢" : "🔴" }}</td>
+        <td>
+          <button
+            class="btn btn-warning btn-sm"
+            (click)="editActivityModal(activity)"
+          >
+            <i class="bi bi-gear-fill"></i>
+          </button>
+          <button
+            class="btn btn-danger btn-sm"
+            style="margin-left: 10px"
+            (click)="deleteActivityModal(activity)"
+          >
+            <i class="bi bi-trash3-fill"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

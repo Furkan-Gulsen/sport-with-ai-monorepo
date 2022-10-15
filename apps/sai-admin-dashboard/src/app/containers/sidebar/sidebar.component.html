@@ -1,0 +1,29 @@
+<div
+  id="sidebar"
+  class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark"
+>
+  <div class="text-center">
+    <div class="mb-3"><i class="bi bi-meta"></i></div>
+    <a class="text-white text-decoration-none">
+      <span class="fs-4">SAI Admin Dashboard</span>
+    </a>
+  </div>
+  <hr />
+  <ul class="nav nav-pills flex-column">
+    <li class="nav-item mt-2" *ngFor="let page of pages">
+      <!-- 
+        [routerLink]="[page.url]"
+       -->
+      <a
+        (click)="changePage(page)"
+        [href]="page.url"
+        [class]="getActivePage(page.url)"
+        aria-current="page"
+      >
+        {{ page.title }}
+      </a>
+    </li>
+  </ul>
+  <hr />
+  <button id="logout" class="btn btn-danger" (click)="logout()">LOGOUT</button>
+</div>

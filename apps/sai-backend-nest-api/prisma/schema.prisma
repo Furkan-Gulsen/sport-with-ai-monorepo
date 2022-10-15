@@ -1,0 +1,187 @@
+datasource db {
+  provider = "postgresql"
+  // url      = "postgresql://postgres:J0tk0gwECPBPMF0jJTeX@sai-postgres.chrxubv5fkw8.us-east-2.rds.amazonaws.com:5432/swai_database"
+  url      = env("DEV_DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+//******************** APP MODELS *******************
+model App {
+  id            String         @id @unique @default(uuid())
+  version       Int            @unique
+  versionName   String         @unique
+  creationDate  DateTime?      @default(now())
+  isActivity    Boolean
+  privacyPolicy PrivacyPolicy?
+}
+
+model PrivacyPolicy {
+  id           String    @id @unique @default(uuid())
+  content      String
+  creationDate DateTime? @default(now())
+  app_id       String    @unique
+  app          App       @relation(fields: [app_id], references: [id], onDelete: Cascade)
+}
+
+//******************** USER MODELS *******************
+model User {
+  id                String    @id @unique @default(uuid())
+  email             String    @unique
+  username          String    @unique
+  password          String
+  token             String?   @unique
+  registerDate      DateTime? @default(now())
+  isNotifyActive    Boolean?  @default(true)
+  theFirstDayOfWeek String?   @default("monday")
+  trainingDays      Int?      @default(3)
+  isAccountActive   Boolean   @default(false)
+  profilePhoto      String?
+  role              String    @default("user")
+
+  personalInformation PersonalInformation?
+  posts               Post[]
+  postComments        PostComment[]
+  userActivities      UserActivity[]
+  userAnsweredPools   UserAnsweredPool[]
+  userHistories       UserHistory[]
+}
+
+model PersonalInformation {
+  id       String  @id @unique @default(uuid())
+  userId   String  @unique
+  user     User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  height   Int
+  weight   Int
+  birthDay String
+  goal     String  @default("lose weight")
+  gender   String?
+}
+
+// TODO: this part will be created by cronjob
+model UserHistory {
+  id              String    @id @unique @default(uuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  creationDate    DateTime? @default(now())
+  // numberOfStep    Int
+  activityCalorie Int?
+}
+
+//******************** SOCIAL MEDIA MODELS *******************
+model Post {
+  id           String   @id @unique @default(uuid())
+  userId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  creationDate DateTime @default(now())
+  content      String   @db.VarChar(300)
+  postType     String?
+  usersWhoLike String[]
+
+  postComments PostComment[]
+  postImage    PostImage?
+  postVideo    PostVideo?
+  pool         Pool?
+
+}
+
+model PostImage {
+  id       String @id @unique @default(uuid())
+  imageURL String
+  postId   String @unique
+  post     Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+model PostVideo {
+  id       String @id @unique @default(uuid())
+  videoURL String
+  postId   String @unique
+  post     Post   @relation(fields: [postId], references: [id], onDelete: Cascade)
+}
+
+// Example: (Pool)
+// {
+//   id: "asfnjasnfkjnaskjfnasof",
+//   options: ["hello", "hi", "hey", "heyooo"],
+//   statistics: [39, 12, 46, 21]
+// }
+model Pool {
+  id               String             @id @unique @default(uuid())
+  options          String[]
+  statistics       Int[]
+  postId           String             @unique
+  post             Post               @relation(fields: [postId], references: [id], onDelete: Cascade)
+  userAnsweredPool UserAnsweredPool[]
+}
+
+model UserAnsweredPool {
+  id           String   @id @unique @default(uuid())
+  answer       Int
+  creationDate DateTime @default(now())
+  pool         Pool     @relation(fields: [poolId], references: [id], onDelete: Cascade)
+  poolId       String
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       String
+}
+
+model PostComment {
+  id            String   @id @unique @default(uuid())
+  creationDate  DateTime @default(now())
+  postId        String
+  post          Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  commentUserId String
+  commentUser   User     @relation(fields: [commentUserId], references: [id], onDelete: Cascade)
+  comment       String   @db.VarChar(300)
+  usersWhoLike  String[]
+}
+
+//******************** ACTIVITY MODELS *******************
+model Workout {
+  id           String        @id @unique @default(uuid())
+  creationDate DateTime      @default(now())
+  name         String
+  kind         String
+  imageURL     String
+  information  String
+  activityDays ActivityDay[]
+}
+
+model ActivityDay {
+  id             String         @id @unique @default(uuid())
+  creationDate   DateTime       @default(now())
+  workoutId      String
+  workout        Workout        @relation(fields: [workoutId], references: [id], onDelete: Cascade)
+  day            Int
+  activiteIDs    String[]
+  userActivities UserActivity[]
+}
+
+model Activity {
+  id                  String   @id @unique @default(uuid())
+  creationDate        DateTime @default(now())
+  name                String
+  imageURL            String
+  numberOfRepetitions Int
+  calorie             Int      @default(100)
+  isAI                Boolean  @default(false)
+}
+
+model UserActivity {
+  id           String   @id @unique @default(uuid())
+  creationDate DateTime @default(now())
+
+  activityDay   ActivityDay? @relation(fields: [activityDayId], references: [id], onDelete: Cascade)
+  activityDayId String?
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+}
+
+model AppLog {
+  id           String   @id @unique @default(uuid())
+  creationDate DateTime @default(now())
+  logType      String
+  message      String
+}
