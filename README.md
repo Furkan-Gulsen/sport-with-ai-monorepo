@@ -1,5 +1,7 @@
 # Sport with AI - Monorepo
 
+![](https://github.com/Furkan-Gulsen/sport-with-ai-monorepo/blob/main/screenshots/SPORT%20WITH%20AI.png?raw=true)
+
 ### Description of the Project
 
 Thanks to the Sport with AI mobile application, people who want to do sports and stay healthy gather on a single platform without the need for another application. With the social media section in our application, interaction between users is increased, a sense of competition is created among users with the league ranking, and the habit of doing sports activities is gained. Thanks to these and similar features, our application has a more extensive usage area than other applications. In the spring term, most of the front-end and back-end developments of the project were completed and the final period planning was created by the team and the task distribution was made.
